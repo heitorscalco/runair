@@ -1,0 +1,23 @@
+Sobre a porta COM da impressora, pra ti alterar ela, vai na telaVenderProduto, na linha 62.
+Pra alterar o modelo da impressora, é na mesma tela, na linha 61.
+Tem que passar um inteiro, conforme os modelos abaixo:
+
+0: MP-20 TH, MP-2000 CI ou MP-2000 TH
+1: MP-20 MI, MP-20 CI ou MP-20 S
+2: Blocos térmicos (com comunicacao serial DTR/DSR)
+3: Bloco 112 mm
+4: ThermalKiosk
+5: MP-4000 TH
+7: MP-4200 TH
+
+eu pensei no seguinte:
+
+em vez de gerar vários .jar com diferentes portas COM setadas, tu pode fazer o seguinte depois de instalar a impressora:
+
+vai em gerenciador de dispositivos (meu computador - propriedades);
+vai em Portas (COM e LPT) - clica na seta pra exibir o conteúdo;
+seleciona a impressora MP 4200 TH, clica com o botão direito nela e vai em propriedades;
+na janela que abrir, vai na aba Configurações de Porta;
+clica em "avançado";
+onde diz: número da porta COM, tenta mudar pra COM12, por exemplo, porque essa porta geralmente nunca é usada. 
+ai ve uma porta livre que todas as máquinas tem em comum e gera um ja com essa porta setada.
