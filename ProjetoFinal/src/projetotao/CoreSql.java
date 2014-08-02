@@ -14,8 +14,7 @@ import java.util.logging.Logger;
     
     private String CONFIRMACAO_SQL = "OK";
     //Meu banco [Heitor] 
-   public static String db_conexao = "jdbc:mysql://192.168.1.7:3306/tickets?user=administrador&password=admin";
-   //public static String db_conexao = "jdbc:mysql://186.202.13.29:3306/tecnigeo?user=tecnigeo&password=ruHCHtjQH8";
+   public static String db_conexao = "jdbc:mysql://0.0.0.0:3306/tickets?user=administrador&password=admin";
     
     public CoreSql() {
 //        Licenciamento lic = new Licenciamento();
