@@ -766,7 +766,7 @@ public class TelaVenderProduto extends javax.swing.JFrame {
             Thread troco = new Thread(threadTroco);
             troco.start();
             
-
+            /*
             String[] options = {"OK"};
             JPanel panel = new JPanel();
             JLabel lbl = new JLabel("Entre com o dinheiro recebido: ");
@@ -806,8 +806,8 @@ public class TelaVenderProduto extends javax.swing.JFrame {
 
                 }
             }
+            */
 
-            if (option == 0) { // se o cara clicar em OK
 
                 System.out.println("JT_CarrinhoCompras.getRowCount(): " + JT_CarrinhoCompras.getRowCount());
 
@@ -886,15 +886,17 @@ public class TelaVenderProduto extends javax.swing.JFrame {
 
                     }
                 }
-
+                /*
                 if (criou) {
 
                     JOptionPane.showMessageDialog(null, "O troco é de: " + d.format(troco - valor)); //mostra quanto tem que dar de troco
 
                 }
+                */
 
-                produtos_selecionados = new Produto[500];
-                cont_produtos_selecionados = 0;
+                this.produtos_selecionados = new Produto[500];
+                this.quantidades = new int[500];
+                this.cont_produtos_selecionados = 0;
                 i = 0;
                 valor = 0.0;
                 troco = 0.0;
@@ -903,7 +905,9 @@ public class TelaVenderProduto extends javax.swing.JFrame {
                 for (int i = (l.length - 1); i >= 0; i--) {
                     dtmcv.removeRow(l[i]); //remove tudo uma por vez ate o for terminar
                 }
-            }
+            
+            
+            
         } else {
 
             JOptionPane.showMessageDialog(null, "A impressora está sem papel!");
