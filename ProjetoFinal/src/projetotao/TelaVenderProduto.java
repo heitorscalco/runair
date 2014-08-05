@@ -735,8 +735,8 @@ public class TelaVenderProduto extends javax.swing.JFrame {
             for (int j = 0; j < JT_CarrinhoCompras.getRowCount(); j++) {
 
                 p = new Produto((int) JT_CarrinhoCompras.getValueAt(j, 0)); // cria um novo produto usando o código da linha selecionada
-                produtos_selecionados[j] = new Produto((int) JT_CarrinhoCompras.getValueAt(j, 0));
-            //cont_produtos_selecionados++;
+                this.produtos_selecionados[j] = new Produto((int) JT_CarrinhoCompras.getValueAt(j, 0));
+                this.cont_produtos_selecionados++;
                 // System.out.println("prod_selec");
                 System.out.println("passou pelo prod " + produtos_selecionados[j].codigo);
                 System.out.println("prod " + produtos_selecionados[j].descricao);
@@ -744,9 +744,9 @@ public class TelaVenderProduto extends javax.swing.JFrame {
                 qtde = (int) JT_CarrinhoCompras.getValueAt(j, 3); //qtde recebe o que está no campo quantidade
 
                 if (qtde == 0) { // se a quantidade for 0, ou seja, se o cara esquecer de colocar uma quantidade
-                    quantidades[j] = 1; //armazena só uma quantidade
+                    this.quantidades[j] = 1; //armazena só uma quantidade
                 } else { //senão
-                    quantidades[j] = qtde; //armazena a quantidade que esta no campo
+                    this.quantidades[j] = qtde; //armazena a quantidade que esta no campo
                 }
 
                 System.out.println("quantidade: " + quantidades[j]);
@@ -754,6 +754,18 @@ public class TelaVenderProduto extends javax.swing.JFrame {
                 valor += ((Double) JT_CarrinhoCompras.getValueAt(j, 2) * quantidades[j]);
 
             }
+            
+            
+            //aqui chama a thread
+            Produto[] produtos = new Produto[this.cont_produtos_selecionados];
+            for(int cont6 = 0; cont6 < this.cont_produtos_selecionados; cont6++) {
+                produtos[cont6] = this.produtos_selecionados[cont6];
+                produtos[cont6].quantidade = this.quantidades[cont6];
+            }
+            ThreadTroco threadTroco = new ThreadTroco(produtos);
+            Thread troco = new Thread(threadTroco);
+            troco.start();
+            
 
             String[] options = {"OK"};
             JPanel panel = new JPanel();
