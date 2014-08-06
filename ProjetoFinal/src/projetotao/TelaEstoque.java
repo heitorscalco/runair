@@ -15,7 +15,10 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 
@@ -84,6 +87,7 @@ public class TelaEstoque extends javax.swing.JFrame {
         JT_Estoque = new javax.swing.JTable();
         JB_Adicionar = new javax.swing.JButton();
         JB_Cancelar = new javax.swing.JButton();
+        JB_Adicionar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -140,6 +144,16 @@ public class TelaEstoque extends javax.swing.JFrame {
             }
         });
 
+        JB_Adicionar1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        JB_Adicionar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetotao/add.png"))); // NOI18N
+        JB_Adicionar1.setText("Adicionar a todos");
+        JB_Adicionar1.setToolTipText("Pressione ENTER para ADICIONAR");
+        JB_Adicionar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_Adicionar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,6 +170,8 @@ public class TelaEstoque extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(JB_Adicionar)
+                                .addGap(18, 18, 18)
+                                .addComponent(JB_Adicionar1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(JB_Cancelar)))))
                 .addContainerGap())
@@ -170,6 +186,7 @@ public class TelaEstoque extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JB_Cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                    .addComponent(JB_Adicionar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(JB_Adicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -206,6 +223,28 @@ public class TelaEstoque extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_formWindowActivated
+
+    private void JB_Adicionar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_Adicionar1ActionPerformed
+        
+        String[] options = {"OK", "Cancelar"};
+        JPanel panel = new JPanel();
+        JLabel lbl = new JLabel("Quantidade: ");
+        JTextField qtd = new JTextField(20);
+        panel.add(lbl);
+        panel.add(qtd);
+
+        //informa o valor total e solicita o valor que o cliente deu
+        int x = JOptionPane.showOptionDialog(null, panel, "Quantidade", JOptionPane.NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+        if(x == 0) {
+            CoreSql c = new CoreSql();
+
+            String sql = "UPDATE b_produto_estoques set quantidade = " + Integer.parseInt(qtd.getText()) + ";";
+            c.executarQuery(sql, false, null);
+
+        }
+        
+    }//GEN-LAST:event_JB_Adicionar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,6 +284,7 @@ public class TelaEstoque extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JB_Adicionar;
+    private javax.swing.JButton JB_Adicionar1;
     private javax.swing.JButton JB_Cancelar;
     private javax.swing.JTable JT_Estoque;
     private javax.swing.JLabel jLabel1;

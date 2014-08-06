@@ -26,10 +26,15 @@ public class ThreadTroco implements Runnable {
         JTextField txt = new JTextField(20);
         panel.add(lbl);
         panel.add(txt);
+        txt.requestFocus();
+        
+        
 
         //informa o valor total e solicita o valor que o cliente deu
-        JOptionPane.showOptionDialog(null, panel, "Valor total da venda é de: " + 15, JOptionPane.NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-
+        JOptionPane.showOptionDialog(null, panel, "Valor total da venda", JOptionPane.NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        txt.requestFocus();
+        
+        
             try {
                 double valor_recebido = Double.parseDouble(txt.getText());
                 if (valor_recebido > this.valor_total_venda) {

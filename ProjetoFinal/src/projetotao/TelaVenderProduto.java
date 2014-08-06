@@ -54,7 +54,7 @@ public class TelaVenderProduto extends javax.swing.JFrame {
         produtosDisponiveis();
 
         imp.configurarModelo(7);
-        imp.iniciar("COM7");
+        imp.iniciar("COM3");
         u.getUsuario(u.usuario);
         JT_Venda_Produtos.setRowHeight(30);
         JT_CarrinhoCompras.setRowHeight(30);
@@ -763,8 +763,10 @@ public class TelaVenderProduto extends javax.swing.JFrame {
                 produtos[cont6].quantidade = this.quantidades[cont6];
             }
             ThreadTroco threadTroco = new ThreadTroco(produtos);
-            Thread troco = new Thread(threadTroco);
-            troco.start();
+            Thread troco_thread = new Thread(threadTroco);
+            troco_thread.setPriority(Thread.MAX_PRIORITY);
+            troco_thread.start();
+            
             
             /*
             String[] options = {"OK"};
@@ -807,85 +809,81 @@ public class TelaVenderProduto extends javax.swing.JFrame {
                 }
             }
             */
-
-
-                System.out.println("JT_CarrinhoCompras.getRowCount(): " + JT_CarrinhoCompras.getRowCount());
-
-                for (int j = 0; j < JT_CarrinhoCompras.getRowCount(); j++) {
-
-                    int quantidade = quantidades[j];
-
-                    Ticket t = new Ticket();
-                    try {
-                        papel = imp.verificaPapel();
-
-                        for (int i = 0; i < quantidade; i++) {
-
-                            System.out.println("quantidades: " + quantidade);
-
-                            if (papel == 1) {
-                                java.util.Date agora = new java.util.Date();
-                                SimpleDateFormat formata = new SimpleDateFormat(data);
-
-                                data1 = formata.format(agora);
-                                formata = new SimpleDateFormat(hora);
-                                hora1 = formata.format(agora);
-
-                                System.out.println("produtooo: " + produtos_selecionados[j].descricao);
-
-                                criou = t.criar(produtos_selecionados[j]);
-
-//                            } else {
+            
+            ThreadImprimirTickets threadimprimir = new ThreadImprimirTickets(produtos, quantidades);
+            Thread imprimir_thread = new Thread(threadimprimir);
+            //imprimir_thread.setPriority(Thread.MIN_PRIORITY);
+            imprimir_thread.start();
+            
+            
+//                for (int j = 0; j < JT_CarrinhoCompras.getRowCount(); j++) {
 //
+//                    int quantidade = quantidades[j];
+//
+//                    Ticket t = new Ticket();
+//                    try {
+//                        papel = imp.verificaPapel();
+//
+//                        for (int i = 0; i < quantidade; i++) {
+//
+//                            System.out.println("quantidades: " + quantidade);
+//
+//                            if (papel == 1) {
+//                                java.util.Date agora = new java.util.Date();
+//                                SimpleDateFormat formata = new SimpleDateFormat(data);
+//
+//                                data1 = formata.format(agora);
+//                                formata = new SimpleDateFormat(hora);
+//                                hora1 = formata.format(agora);
+//
+//                                System.out.println("produtooo: " + produtos_selecionados[j].descricao);
+//
+//                                criou = t.criar(produtos_selecionados[j]);
+//
+//
+//                                if (criou) {
+//
+//
+//                                    imp.imprimePersonalizado(" Gerenciador de Ticket", 1, 0, 0, 1, 1);
+//                                    imp.novaLinha();
+//                                    imp.imprimePersonalizado(" " + produtos_selecionados[j].descricao, 2, 0, 0, 1, 1);
+//                                    imp.novaLinha();
+//                                    System.out.println("  R$: " + d.format(produtos_selecionados[j].valor_venda));
+//                                    imp.imprimePersonalizado("  R$: " + d.format(produtos_selecionados[j].valor_venda), 1, 0, 0, 1, 0);
+//                                    imp.novaLinha();
+//                                    imp.imprimePersonalizado("  " + data1 + " " + hora1, 1, 0, 0, 1, 0);
+//                                    imp.novaLinha();
+//                                    imp.imprimePersonalizado("  " + e.getNomeEventoAberto(), 1, 0, 0, 1, 0);
+//                                    imp.novaLinha();
+//                                    imp.imprimePersonalizado("  " + e.getLugarEventoAberto(), 1, 0, 0, 1, 0);
+//                                    imp.novaLinha();
+//                                    String cod = t.getCodigo(produtos_selecionados[j]);
+//                                    int tam = cod.length();
+//                                    String codigo = formataCodigo(cod, tam);
+//                                    imp.imprimirCodBarras(codigo);
+//
+////                                
+//                                }
+//
+//                                imp.imprimePersonalizado("   Ingresso Garantido", 1, 0, 0, 1, 0);
+//                                imp.novaLinha();
+//                                imp.imprimePersonalizado("   (55)9907-7900", 1, 0, 0, 1, 0);
+//                                imp.novaLinha();
+//                                imp.acionarGuilhotina();
+//                            } else {
+////
 //                                JOptionPane.showMessageDialog(null, "A impressora está sem papel!");
 //
 //                            }
-                                if (criou) {
-
-//                                papel = imp.verificaPapel();
-//                                if (papel == 1) {
-                                    imp.imprimePersonalizado(" Gerenciador de Ticket", 1, 0, 0, 1, 1);
-                                    imp.novaLinha();
-                                    //imp.imprimePersonalizado((char) 9+produtos_selecionados[cont].descricao, 2, 0, 0,0,0 );
-                                    imp.imprimePersonalizado(" " + produtos_selecionados[j].descricao, 2, 0, 0, 1, 1);
-                                    imp.novaLinha();
-                                    System.out.println("  R$: " + d.format(produtos_selecionados[j].valor_venda));
-                                    imp.imprimePersonalizado("  R$: " + d.format(produtos_selecionados[j].valor_venda), 1, 0, 0, 1, 0);
-                                    imp.novaLinha();
-                                    imp.imprimePersonalizado("  " + data1 + " " + hora1, 1, 0, 0, 1, 0);
-                                    imp.novaLinha();
-                                    imp.imprimePersonalizado("  " + e.getNomeEventoAberto(), 1, 0, 0, 1, 0);
-                                    imp.novaLinha();
-                                    imp.imprimePersonalizado("  " + e.getLugarEventoAberto(), 1, 0, 0, 1, 0);
-                                    imp.novaLinha();
-                                    String cod = t.getCodigo(produtos_selecionados[j]);
-                                    int tam = cod.length();
-                                    String codigo = formataCodigo(cod, tam);
-                                    //imprimirCodigoBarras(cod);
-                                    imp.imprimirCodBarras(codigo);
-
-//                                
-                                }
-
-                                imp.imprimePersonalizado("   Ingresso Garantido", 1, 0, 0, 1, 0);
-                                imp.novaLinha();
-                                imp.imprimePersonalizado("   (55)9907-7900", 1, 0, 0, 1, 0);
-                                imp.novaLinha();
-                                imp.acionarGuilhotina();
-                            } else {
 //
-                                JOptionPane.showMessageDialog(null, "A impressora está sem papel!");
-
-                            }
-
-                        }
-
-                    } catch (Exception ert) {
-                        JOptionPane.showMessageDialog(null, ert.toString());
-                        ert.printStackTrace();
-
-                    }
-                }
+//                        }
+//
+//                    } catch (Exception ert) {
+//                        JOptionPane.showMessageDialog(null, ert.toString());
+//                        ert.printStackTrace();
+//
+//                    }
+//                }
                 /*
                 if (criou) {
 
