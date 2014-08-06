@@ -276,7 +276,7 @@ public class Tela_login extends javax.swing.JFrame {
 
                 if (u.isLogin_correto()) {
 
-                    if (u.isLogado()) {
+                    if (u.isLogado() && !login.equals("root")) {
 
                         JOptionPane.showMessageDialog(null, "O usuário já está logado em outro computador!", "Atenção", JOptionPane.ERROR_MESSAGE);
 

@@ -24,6 +24,11 @@ public class TelaAdministrador extends javax.swing.JFrame {
     public TelaAdministrador() {
         initComponents();
         setLocationRelativeTo(null);
+//        
+//        u.getUsuario(u.usuario);
+//        if (u.getTipo_usuario() == 1) {
+//            JB_Vender1.setVisible(false);
+//        }
 
         JB_Novo_Evento.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_N, 0), "novo_evento");
         JB_Novo_Evento.getActionMap().put("novo_evento", new AbstractAction() {
@@ -176,6 +181,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
         JB_Logout = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         JB_Vender = new javax.swing.JButton();
+        JB_Vender1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         JM_Novo = new javax.swing.JMenu();
         JMI_NovoProduto = new javax.swing.JMenuItem();
@@ -267,6 +273,16 @@ public class TelaAdministrador extends javax.swing.JFrame {
         JB_Vender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JB_VenderActionPerformed(evt);
+            }
+        });
+
+        JB_Vender1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        JB_Vender1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetotao/check.png"))); // NOI18N
+        JB_Vender1.setText("Contabilizar");
+        JB_Vender1.setToolTipText("Pressione V para VENDER");
+        JB_Vender1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_Vender1ActionPerformed(evt);
             }
         });
 
@@ -371,6 +387,8 @@ public class TelaAdministrador extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(JB_Vender)
+                .addGap(73, 73, 73)
+                .addComponent(JB_Vender1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(JB_Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -410,7 +428,9 @@ public class TelaAdministrador extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JB_Logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JB_Vender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(JB_Vender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JB_Vender1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -553,6 +573,10 @@ public class TelaAdministrador extends javax.swing.JFrame {
 //        u.usuario = "";
     }//GEN-LAST:event_formWindowClosing
 
+    private void JB_Vender1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_Vender1ActionPerformed
+        new Tela_valida_ticket().setVisible(true);
+    }//GEN-LAST:event_JB_Vender1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -596,6 +620,7 @@ public class TelaAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton JB_Novo_Evento;
     private javax.swing.JButton JB_Produtos;
     private javax.swing.JButton JB_Vender;
+    private javax.swing.JButton JB_Vender1;
     private javax.swing.JLabel JL_Gerenciador_Fichas;
     private javax.swing.JMenuItem JMI_Contato;
     private javax.swing.JMenuItem JMI_Desenvolvimento;

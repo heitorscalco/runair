@@ -1,5 +1,6 @@
 package projetotao;
 
+import java.text.DecimalFormat;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,10 +20,12 @@ public class ThreadTroco implements Runnable {
     }
     
     public void run () {
+        
+        DecimalFormat d = new DecimalFormat("####,##0.00");
             
         String[] options = {"OK"};
         JPanel panel = new JPanel();
-        JLabel lbl = new JLabel("TOTAL: " + this.valor_total_venda + ". Valor recebido: ");
+        JLabel lbl = new JLabel("TOTAL: " + d.format(this.valor_total_venda) + ". Valor recebido: ");
         JTextField txt = new JTextField(20);
         panel.add(lbl);
         panel.add(txt);
@@ -36,9 +39,9 @@ public class ThreadTroco implements Runnable {
         
         
             try {
-                double valor_recebido = Double.parseDouble(txt.getText());
+                double valor_recebido = Double.parseDouble(txt.getText().replace(",", "."));
                 if (valor_recebido > this.valor_total_venda) {
-                    JOptionPane.showMessageDialog(null, "Troco: " + (valor_recebido - this.valor_total_venda));
+                    JOptionPane.showMessageDialog(null, "Troco: " + d.format(valor_recebido - this.valor_total_venda));
                 } else {
                     JOptionPane.showMessageDialog(null, "Você informou um valor menor que o custo total dos produtos");
                 }
