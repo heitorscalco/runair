@@ -967,7 +967,9 @@ public class TelaVenderProduto extends javax.swing.JFrame {
             System.out.println("Erro: " + ex.toString());
         }
 
-        retorno += "Valor em caixa: " + d.format(quanto_o_usuario_vendeu_em_dinheiro) + "</html>";
+        //retorno += "Valor em caixa: " + d.format(quanto_o_usuario_vendeu_em_dinheiro) + "</html>";
+        retorno += "Valor em caixa: "+"<br>";
+        retorno += d.format(quanto_o_usuario_vendeu_em_dinheiro) + "</html>";
 
         String[] options = {"IMPRIMIR"};
         JPanel panel = new JPanel();
@@ -980,13 +982,23 @@ public class TelaVenderProduto extends javax.swing.JFrame {
             int papel = imp.verificaPapel();
             if (papel == 1) {
 
-                imp.imprimePersonalizado("   " + login, 2, 0, 0, 1, 1);
+                imp.imprimePersonalizado("    " + login, 2, 0, 0, 1, 1);
                 imp.novaLinha();
-                imp.imprimePersonalizado("    ID: " + id, 1, 0, 0, 1, 0);
+                //imp.imprimePersonalizado("         ID: " + id, 1, 0, 0, 1, 0);
                 imp.novaLinha();
-                imp.imprimePersonalizado("    " + data1 + " " + hora1, 1, 0, 0, 1, 0);
                 imp.novaLinha();
-                imp.imprimePersonalizado("  Valor em caixa: " + d.format(quanto_o_usuario_vendeu_em_dinheiro), 1, 0, 0, 1, 0);
+                imp.imprimePersonalizado(" Fechamento do Caixa:" , 1, 0, 0, 1, 0);
+                imp.novaLinha();
+                imp.imprimePersonalizado(" " + data1 + " " + hora1, 1, 0, 0, 1, 0);
+                imp.novaLinha();
+                imp.novaLinha();
+                imp.novaLinha();
+                imp.imprimePersonalizado("  Valor em caixa: " , 1, 0, 0, 1, 0);
+                imp.novaLinha();
+                imp.imprimePersonalizado("   "  + d.format(quanto_o_usuario_vendeu_em_dinheiro), 2, 0, 0, 1, 1);
+                imp.novaLinha();
+                imp.novaLinha();
+                imp.imprimePersonalizado("   Bar Garantido", 2, 0, 0, 1, 1);
                 imp.novaLinha();
                 imp.acionarGuilhotina();
             } else {
