@@ -40,7 +40,7 @@ public class ThreadTroco implements Runnable {
         
             try {
                 double valor_recebido = Double.parseDouble(txt.getText().replace(",", "."));
-                if (valor_recebido > this.valor_total_venda) {
+                if (valor_recebido >= this.valor_total_venda) {
                     JOptionPane.showMessageDialog(null, "Troco: " + d.format(valor_recebido - this.valor_total_venda));
                 } else {
                     JOptionPane.showMessageDialog(null, "Você informou um valor menor que o custo total dos produtos");

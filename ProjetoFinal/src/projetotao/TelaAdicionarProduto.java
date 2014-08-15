@@ -272,5 +272,9 @@ public class TelaAdicionarProduto extends javax.swing.JFrame {
             }
 
         }
+        JTF_Descricao.setText("");
+        JTF_ValorCompra.setText("");
+        JTF_ValorVenda.setText("");
+        JTF_Descricao.requestFocusInWindow();
     }
 }
